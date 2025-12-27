@@ -34,14 +34,11 @@ To develop a C program using the static storage class in a function with a param
   Stop
 # Program:
 #include <stdio.h>
-
-// Function to display incremental float values
 void displayIncremental(int n) {
-    static float value = 100.0; // static variable retains value across calls
+    static float value = 100.0;
     int i;
-
     for (i = 1; i <= 5; i++) {
-        value += 1.25 + (i - 1) * 100.0; // incremental pattern
+        value += 1.25 + (i - 1) * 100.0;
         printf("%.2f  ", value);
     }
     printf("\n");
@@ -49,18 +46,15 @@ void displayIncremental(int n) {
 
 int main() {
     int input;
-
     printf("Enter an input value: ");
     scanf("%d", &input);
-
     displayIncremental(input);
-
     return 0;
 }
 
 # Output:
-Enter an input value: 1
-101.25  202.50  403.75  705.00  1106.25 
+<img width="462" height="230" alt="image" src="https://github.com/user-attachments/assets/d7627c06-89b7-458d-a307-7d2405a3497d" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -107,8 +101,6 @@ Thus, the program was implemented and executed successfully, and the required ou
   Stop
 # Program:
 #include <stdio.h>
-
-// Function prototypes
 int add(int a, int b) { return a + b; }
 int subtract(int a, int b) { return a - b; }
 int multiply(int a, int b) { return a * b; }
@@ -117,19 +109,14 @@ float divide(int a, int b) { return (b != 0) ? (float)a / b : 0; }
 int main() {
     int num1, num2, choice;
     float result;
-
-    // Function pointers
     int (*intOp)(int, int);
     float (*floatOp)(int, int);
-
     printf("Enter two integers: ");
     scanf("%d %d", &num1, &num2);
-
     printf("\nSelect operation:\n");
     printf("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n");
     printf("Enter your choice (1-4): ");
     scanf("%d", &choice);
-
     switch (choice) {
         case 1:
             intOp = add;
@@ -158,21 +145,11 @@ int main() {
         default:
             printf("Invalid choice.\n");
     }
-
     return 0;
 }
 
 # Output:
-Enter two integers: 23 55
-
-Select operation:
-1. Addition
-2. Subtraction
-3. Multiplication
-4. Division
-Enter your choice (1-4): 3
-Multiplication result: 1265.00
-
+<img width="407" height="398" alt="image" src="https://github.com/user-attachments/assets/f68af91c-88a6-4a74-ba80-eadc38e5632c" />
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -218,8 +195,6 @@ Thus, the program was implemented and executed successfully, and the required ou
 # Program:
 #include <stdio.h>
 #include <string.h>
-
-// Define structure for Employee
 struct Employee {
     int empNo;
     char name[50];
@@ -228,14 +203,10 @@ struct Employee {
 
 int main() {
     int n, i;
-    float maxSalary;
-    
+    float maxSalary;    
     printf("Enter the number of employees: ");
     scanf("%d", &n);
-
     struct Employee emp[n];
-
-    // Input employee details
     for (i = 0; i < n; i++) {
         printf("\nEnter details for employee %d:\n", i + 1);
         printf("Employee Number: ");
@@ -245,16 +216,12 @@ int main() {
         printf("Salary: ");
         scanf("%f", &emp[i].salary);
     }
-
-    // Find the maximum salary
     maxSalary = emp[0].salary;
     for (i = 1; i < n; i++) {
         if (emp[i].salary > maxSalary) {
             maxSalary = emp[i].salary;
         }
     }
-
-    // Display employee(s) with maximum salary
     printf("\nEmployee(s) with the highest salary (%.2f):\n", maxSalary);
     for (i = 0; i < n; i++) {
         if (emp[i].salary == maxSalary) {
@@ -262,30 +229,13 @@ int main() {
                     emp[i].empNo, emp[i].name, emp[i].salary);
         }
     }
-
     return 0;
 }
 
 # Output:
-Enter the number of employees: 3
+<img width="652" height="627" alt="image" src="https://github.com/user-attachments/assets/ebc077a7-b4fb-4dee-b155-d3cac7d5fdb7" />
 
-Enter details for employee 1:
-Employee Number: 1001
-Name: Harshitha
-Salary: 30000
 
-Enter details for employee 2:
-Employee Number: 1002
-Name: Sakthipriya
-Salary: 20000
-
-Enter details for employee 3:
-Employee Number: 1003
-Name: Kalairani
-Salary: 50000
-
-Employee(s) with the highest salary (50000.00):
-Employee Number: 1003, Name: Kalairani, Salary: 50000.00
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -362,9 +312,8 @@ int main() {
     return 0;
 }
 # Output:
-Enter current date (DD/MM/YYYY): 27/12/2025
-Enter birth date (DD/MM/YYYY): 01/06/2008
-Present age: 17 years, 6 months, 26 days
+<img width="520" height="227" alt="image" src="https://github.com/user-attachments/assets/00a50b2e-32dd-4808-8ddd-1af0e30b5005" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -401,8 +350,6 @@ Thus, the program was implemented and executed successfully, and the required ou
   Stop
 # Program:
 #include <stdio.h>
-
-// Define a union
 union Data {
     int intValue;
     char charValue;
@@ -411,27 +358,18 @@ union Data {
 int main() {
     union Data d;
     union Data *ptr;
-
-    // Pointer to the union
     ptr = &d;
-
-    // Input integer from user
     printf("Enter an integer value: ");
     scanf("%d", &ptr->intValue);
-
-    // Access union members using pointer
     printf("Accessing via union pointer:\n");
     printf("As integer: %d\n", ptr->intValue);
     printf("As character: %c\n", ptr->charValue);
-
     return 0;
 }
 
 # Output:
-Enter an integer value: 66
-Accessing via union pointer:
-As integer: 66
-As character: B
+<img width="382" height="288" alt="image" src="https://github.com/user-attachments/assets/3aed97a2-c43b-4b4f-a074-8677089f95a0" />
+
 
 
 
