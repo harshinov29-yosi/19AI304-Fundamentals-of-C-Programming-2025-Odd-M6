@@ -329,27 +329,20 @@ Thus, the program was implemented and executed successfully, and the required ou
   Stop
 # Program:
 #include <stdio.h>
-
-// Structure to store a date
 struct Date {
     int day;
     int month;
     int year;
 };
-
-// Function to calculate age by passing structures as reference
 void calculateAge(struct Date *birth, struct Date *current) {
     int ageYears, ageMonths, ageDays;
 
-    // Initialize with differences
     ageYears = current->year - birth->year;
     ageMonths = current->month - birth->month;
     ageDays = current->day - birth->day;
-
-    // Adjust days and months if needed
     if (ageDays < 0) {
         ageMonths -= 1;
-        ageDays += 30; // Approximation of days in a month
+        ageDays += 30;
     }
     if (ageMonths < 0) {
         ageYears -= 1;
@@ -361,18 +354,11 @@ void calculateAge(struct Date *birth, struct Date *current) {
 
 int main() {
     struct Date birthDate, currentDate;
-
-    // Input current date in DD/MM/YYYY format
     printf("Enter current date (DD/MM/YYYY): ");
     scanf("%d/%d/%d", &currentDate.day, &currentDate.month, &currentDate.year);
-
-    // Input birth date in DD/MM/YYYY format
     printf("Enter birth date (DD/MM/YYYY): ");
     scanf("%d/%d/%d", &birthDate.day, &birthDate.month, &birthDate.year);
-
-    // Calculate age
     calculateAge(&birthDate, &currentDate);
-
     return 0;
 }
 # Output:
