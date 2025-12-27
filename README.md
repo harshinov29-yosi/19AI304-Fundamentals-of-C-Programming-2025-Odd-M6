@@ -33,7 +33,34 @@ To develop a C program using the static storage class in a function with a param
 ### Step 8:
   Stop
 # Program:
+#include <stdio.h>
+
+// Function to display incremental float values
+void displayIncremental(int n) {
+    static float value = 100.0; // static variable retains value across calls
+    int i;
+
+    for (i = 1; i <= 5; i++) {
+        value += 1.25 + (i - 1) * 100.0; // incremental pattern
+        printf("%.2f  ", value);
+    }
+    printf("\n");
+}
+
+int main() {
+    int input;
+
+    printf("Enter an input value: ");
+    scanf("%d", &input);
+
+    displayIncremental(input);
+
+    return 0;
+}
+
 # Output:
+Enter an input value: 1
+101.25  202.50  403.75  705.00  1106.25 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -79,7 +106,73 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 11:
   Stop
 # Program:
+#include <stdio.h>
+
+// Function prototypes
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a - b; }
+int multiply(int a, int b) { return a * b; }
+float divide(int a, int b) { return (b != 0) ? (float)a / b : 0; }
+
+int main() {
+    int num1, num2, choice;
+    float result;
+
+    // Function pointers
+    int (*intOp)(int, int);
+    float (*floatOp)(int, int);
+
+    printf("Enter two integers: ");
+    scanf("%d %d", &num1, &num2);
+
+    printf("\nSelect operation:\n");
+    printf("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n");
+    printf("Enter your choice (1-4): ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            intOp = add;
+            result = intOp(num1, num2);
+            printf("Addition result: %.2f\n", result);
+            break;
+        case 2:
+            intOp = subtract;
+            result = intOp(num1, num2);
+            printf("Subtraction result: %.2f\n", result);
+            break;
+        case 3:
+            intOp = multiply;
+            result = intOp(num1, num2);
+            printf("Multiplication result: %.2f\n", result);
+            break;
+        case 4:
+            if (num2 == 0) {
+                printf("Division by zero is not allowed.\n");
+            } else {
+                floatOp = divide;
+                result = floatOp(num1, num2);
+                printf("Division result: %.2f\n", result);
+            }
+            break;
+        default:
+            printf("Invalid choice.\n");
+    }
+
+    return 0;
+}
+
 # Output:
+Enter two integers: 23 55
+
+Select operation:
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+Enter your choice (1-4): 3
+Multiplication result: 1265.00
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -123,7 +216,76 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10:
   Stop
 # Program:
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for Employee
+struct Employee {
+    int empNo;
+    char name[50];
+    float salary;
+};
+
+int main() {
+    int n, i;
+    float maxSalary;
+    
+    printf("Enter the number of employees: ");
+    scanf("%d", &n);
+
+    struct Employee emp[n];
+
+    // Input employee details
+    for (i = 0; i < n; i++) {
+        printf("\nEnter details for employee %d:\n", i + 1);
+        printf("Employee Number: ");
+        scanf("%d", &emp[i].empNo);
+        printf("Name: ");
+        scanf(" %[^\n]", emp[i].name); // read string with spaces
+        printf("Salary: ");
+        scanf("%f", &emp[i].salary);
+    }
+
+    // Find the maximum salary
+    maxSalary = emp[0].salary;
+    for (i = 1; i < n; i++) {
+        if (emp[i].salary > maxSalary) {
+            maxSalary = emp[i].salary;
+        }
+    }
+
+    // Display employee(s) with maximum salary
+    printf("\nEmployee(s) with the highest salary (%.2f):\n", maxSalary);
+    for (i = 0; i < n; i++) {
+        if (emp[i].salary == maxSalary) {
+            printf("Employee Number: %d, Name: %s, Salary: %.2f\n", 
+                    emp[i].empNo, emp[i].name, emp[i].salary);
+        }
+    }
+
+    return 0;
+}
+
 # Output:
+Enter the number of employees: 3
+
+Enter details for employee 1:
+Employee Number: 1001
+Name: Harshitha
+Salary: 30000
+
+Enter details for employee 2:
+Employee Number: 1002
+Name: Sakthipriya
+Salary: 20000
+
+Enter details for employee 3:
+Employee Number: 1003
+Name: Kalairani
+Salary: 50000
+
+Employee(s) with the highest salary (50000.00):
+Employee Number: 1003, Name: Kalairani, Salary: 50000.00
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -134,7 +296,7 @@ Thus, the program was implemented and executed successfully, and the required ou
   Create the C program to calculate the present age of a person by passing structure as a reference.
 # Date : 
 # Aim:
-  To create a C program that uses a structure to store the current date and birth date, and to calculate the person’s present age in years, months, and days by passing the structure as a reference.
+  To create a C program that uses a structure to store the currnt agent date and birth date, and to calculate the person’s presee in years, months, and days by passing the structure as a reference.
 # Algorithm:
 ### Step 1:
   Start
@@ -166,7 +328,57 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9:
   Stop
 # Program:
+#include <stdio.h>
+
+// Structure to store a date
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+// Function to calculate age by passing structures as reference
+void calculateAge(struct Date *birth, struct Date *current) {
+    int ageYears, ageMonths, ageDays;
+
+    // Initialize with differences
+    ageYears = current->year - birth->year;
+    ageMonths = current->month - birth->month;
+    ageDays = current->day - birth->day;
+
+    // Adjust days and months if needed
+    if (ageDays < 0) {
+        ageMonths -= 1;
+        ageDays += 30; // Approximation of days in a month
+    }
+    if (ageMonths < 0) {
+        ageYears -= 1;
+        ageMonths += 12;
+    }
+
+    printf("Present age: %d years, %d months, %d days\n", ageYears, ageMonths, ageDays);
+}
+
+int main() {
+    struct Date birthDate, currentDate;
+
+    // Input current date in DD/MM/YYYY format
+    printf("Enter current date (DD/MM/YYYY): ");
+    scanf("%d/%d/%d", &currentDate.day, &currentDate.month, &currentDate.year);
+
+    // Input birth date in DD/MM/YYYY format
+    printf("Enter birth date (DD/MM/YYYY): ");
+    scanf("%d/%d/%d", &birthDate.day, &birthDate.month, &birthDate.year);
+
+    // Calculate age
+    calculateAge(&birthDate, &currentDate);
+
+    return 0;
+}
 # Output:
+Enter current date (DD/MM/YYYY): 27/12/2025
+Enter birth date (DD/MM/YYYY): 01/06/2008
+Present age: 17 years, 6 months, 26 days
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -202,7 +414,41 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10:
   Stop
 # Program:
+#include <stdio.h>
+
+// Define a union
+union Data {
+    int intValue;
+    char charValue;
+};
+
+int main() {
+    union Data d;
+    union Data *ptr;
+
+    // Pointer to the union
+    ptr = &d;
+
+    // Input integer from user
+    printf("Enter an integer value: ");
+    scanf("%d", &ptr->intValue);
+
+    // Access union members using pointer
+    printf("Accessing via union pointer:\n");
+    printf("As integer: %d\n", ptr->intValue);
+    printf("As character: %c\n", ptr->charValue);
+
+    return 0;
+}
+
 # Output:
+Enter an integer value: 66
+Accessing via union pointer:
+As integer: 66
+As character: B
+
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
